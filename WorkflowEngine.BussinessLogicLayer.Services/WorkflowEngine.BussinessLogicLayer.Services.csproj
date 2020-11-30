@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WorkflowEngine.Core\WorkflowEngine.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Haskap.LayeredArchitecture.BussinessLogicLayer.Services">
+      <HintPath>..\References\Haskap.LayeredArchitecture.BussinessLogicLayer.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Haskap.LayeredArchitecture.Core">
+      <HintPath>..\References\Haskap.LayeredArchitecture.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccessLayer.Repositories">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccessLayer.Repositories.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

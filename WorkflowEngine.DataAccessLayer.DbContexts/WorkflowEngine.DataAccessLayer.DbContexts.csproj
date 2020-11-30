@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201015143136_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201015143136_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201015143514_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201015143514_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201015143904_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201015143904_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201015144140_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201015144140_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201015144353_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201015144353_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201016055236_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201016055236_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201016055858_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201016055858_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201016060258_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201016060258_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201016060531_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201016060531_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201016060833_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201016060833_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201019061631_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201019061631_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201019062414_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201019062414_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20201019062750_InitialMigration.cs" />
+    <Compile Remove="Migrations\20201019062750_InitialMigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Oracle.EntityFrameworkCore" Version="3.19.80" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WorkflowEngine.Core\WorkflowEngine.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Haskap.LayeredArchitecture.Core">
+      <HintPath>..\References\Haskap.LayeredArchitecture.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccessLayer.DbContexts.OraclelDbContext">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccessLayer.DbContexts.OraclelDbContext.dll</HintPath>
+    </Reference>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccessLayer.EntityConfiguration">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccessLayer.EntityConfiguration.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
