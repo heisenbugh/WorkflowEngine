@@ -23,7 +23,7 @@ namespace WorkflowEngine.BussinessLogicLayer.Services
                 FirstName = addUserInputDto.FirstName,
                 LastName = addUserInputDto.LastName
             };
-            UnitOfWork.UserRepository.Add(user);
+            UnitOfWork.GetRepository<User>().Add(user);
             UnitOfWork.SaveChanges();
         }
     }

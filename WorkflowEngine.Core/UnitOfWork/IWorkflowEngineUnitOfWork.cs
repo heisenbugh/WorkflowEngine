@@ -9,15 +9,7 @@ namespace WorkflowEngine.Core.UnitOfWork
 {
     public interface IWorkflowEngineUnitOfWork : IBaseUnitOfWork
     {
-        IBaseRepository<User> UserRepository { get; }
-        IBaseRepository<Entities.Action> ActionRepository { get; }
-        IBaseRepository<Path> PathRepository { get; }
-        IBaseRepository<PathUser> PathUserRepository { get; }
-        IBaseRepository<Process> ProcessRepository { get; }
-        IBaseRepository<ProcessAdmin> ProcessAdminRepository { get; }
-        IBaseRepository<Progress> ProgressRepository { get; }
-        IBaseRepository<Request> RequestRepository { get; }
-        IBaseRepository<State> StateRepository { get; }
-        IBaseRepository<StateUser> StateUserRepository { get; }
+        IBaseRepository<TEntity> GetRepository<TEntity>()
+            where TEntity : BaseEntity;
     }
 }

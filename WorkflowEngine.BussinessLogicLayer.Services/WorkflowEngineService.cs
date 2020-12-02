@@ -21,24 +21,24 @@ namespace WorkflowEngine.BussinessLogicLayer.Services
 
         public State GetRequestCurrentState(Guid requestId)
         {
-            return UnitOfWork.RequestRepository.Get(x => x.Id == requestId, e => e.Include(x => x.CurrentState)).CurrentState;
+            return UnitOfWork.GetRepository<Request>().Get(x => x.Id == requestId, e => e.Include(x => x.CurrentState)).CurrentState;
         }
 
         public State GetRequestNextState(Guid requestId, string actionCodeName, Guid userId)
         {
-            var request = UnitOfWork.RequestRepository.GetById(requestId);
+            var request = UnitOfWork.GetRepository<Request>().GetById(requestId);
             State nextState;
-            var isProcessAdmin = UnitOfWork.ProcessAdminRepository.Exists(x => x.AdminId == userId && x.ProcessId == request.ProcessId, string.Empty);
+            var isProcessAdmin = UnitOfWork.GetRepository<ProcessAdmin>().Exists(x => x.AdminId == userId && x.ProcessId == request.ProcessId, string.Empty);
             if (isProcessAdmin == true)
             {
-                var path = UnitOfWork.PathRepository.Get(x => x.FromStateId == request.CurrentStateId && x.Action.CodeName == actionCodeName, "Action,ToState");
+                var path = UnitOfWork.GetRepository<Path>().Get(x => x.FromStateId == request.CurrentStateId && x.Action.CodeName == actionCodeName, "Action,ToState");
                 nextState = path.ToState;
             }
             else
             {
-                var paths = UnitOfWork.PathRepository.GetMany(x => x.FromStateId == request.CurrentStateId, "Action,ToState");
+                var paths = UnitOfWork.GetRepository<Path>().GetMany(x => x.FromStateId == request.CurrentStateId, "Action,ToState");
                 var pathIds = paths.Select(x => x.Id);
-                var authorizedPathUsers = UnitOfWork.PathUserRepository.GetMany(x => pathIds.Contains(x.PathId) && x.UserId == userId, string.Empty);
+                var authorizedPathUsers = UnitOfWork.GetRepository<PathUser>().GetMany(x => pathIds.Contains(x.PathId) && x.UserId == userId, string.Empty);
                 var authorizedPathIds = authorizedPathUsers.Select(x => x.PathId);
                 var path = paths.Where(x => authorizedPathIds.Contains(x.Id) && x.Action.CodeName == actionCodeName).SingleOrDefault();
 
@@ -55,7 +55,7 @@ namespace WorkflowEngine.BussinessLogicLayer.Services
 
         public State GetStartState(Guid processId)
         {
-            return UnitOfWork.StateRepository.Get(x => x.ProcessId == processId && x.CodeName == "StartState", string.Empty);
+            return UnitOfWork.GetRepository<State>().Get(x => x.ProcessId == processId && x.CodeName == "StartState", string.Empty);
         }
 
         public Progress SaveProgress(Guid requestId, string actionCodeName, Guid userId, string message, RequestData data)
@@ -70,12 +70,12 @@ namespace WorkflowEngine.BussinessLogicLayer.Services
                 ProgressedById = userId,
                 RequestId = requestId
             };
-            UnitOfWork.ProgressRepository.Add(progress);
+            UnitOfWork.GetRepository<Progress>().Add(progress);
 
-            var request = UnitOfWork.RequestRepository.GetById(requestId);
+            var request = UnitOfWork.GetRepository<Request>().GetById(requestId);
             request.CurrentStateId = nextState.Id;
             request.Data = data;
-            UnitOfWork.RequestRepository.Update(request);
+            UnitOfWork.GetRepository<Request>().Update(request);
 
             UnitOfWork.SaveChanges();
 
@@ -84,15 +84,15 @@ namespace WorkflowEngine.BussinessLogicLayer.Services
 
         public IList<Path> GetPossibleRequestPaths(Guid requestId, Guid userId)
         {
-            var request = UnitOfWork.RequestRepository.GetById(requestId);
-            var paths = UnitOfWork.PathRepository.GetMany(x => x.FromStateId == request.CurrentStateId, e => e.Include(x => x.Action).Include(x => x.ToState).Include(x => x.FromState));
+            var request = UnitOfWork.GetRepository<Request>().GetById(requestId);
+            var paths = UnitOfWork.GetRepository<Path>().GetMany(x => x.FromStateId == request.CurrentStateId, e => e.Include(x => x.Action).Include(x => x.ToState).Include(x => x.FromState));
             var authorizedPossiblePaths = paths;
-            var isProcessAdmin = UnitOfWork.ProcessAdminRepository.Exists(x => x.AdminId == userId && x.ProcessId == request.ProcessId, string.Empty);
+            var isProcessAdmin = UnitOfWork.GetRepository<ProcessAdmin>().Exists(x => x.AdminId == userId && x.ProcessId == request.ProcessId, string.Empty);
 
             if (isProcessAdmin == false)
             {
                 var pathIds = paths.Select(x => x.Id);
-                var authorizedPathUsers = UnitOfWork.PathUserRepository.GetMany(x => pathIds.Contains(x.PathId) && x.UserId == userId, string.Empty);
+                var authorizedPathUsers = UnitOfWork.GetRepository<PathUser>().GetMany(x => pathIds.Contains(x.PathId) && x.UserId == userId, string.Empty);
                 var authorizedPathIds = authorizedPathUsers.Select(x => x.PathId);
                 authorizedPossiblePaths = paths.Where(x => authorizedPathIds.Contains(x.Id)).ToList();
             }

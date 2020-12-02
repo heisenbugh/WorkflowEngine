@@ -14,6 +14,9 @@ using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
 using WorkflowEngine.DataAccessLayer.DbContexts;
 using WorkflowEngine.DataAccessLayer.UnitOfWorks;
+using WorkflowEngine.Core.Repositories;
+using WorkflowEngine.Core.Entities;
+using WorkflowEngine.DataAccessLayer.Repositories;
 
 namespace WorkflowEngine.UI.MvcUI
 {
@@ -32,7 +35,20 @@ namespace WorkflowEngine.UI.MvcUI
             services.AddControllersWithViews();
 
             services.AddDbContext<EfCoreOracleWorkflowEngineDbContext>(options => options.UseOracle(Configuration.GetConnectionString("ConnectionString")));
+            
+            services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
+            services.AddScoped<IBaseRepository<Core.Entities.Action>, BaseRepository<Core.Entities.Action>>();
+            services.AddScoped<IBaseRepository<Path>, BaseRepository<Path>>();
+            services.AddScoped<IBaseRepository<PathUser>, BaseRepository<PathUser>>();
+            services.AddScoped<IBaseRepository<Process>, BaseRepository<Process>>();
+            services.AddScoped<IBaseRepository<ProcessAdmin>, BaseRepository<ProcessAdmin>>();
+            services.AddScoped<IBaseRepository<Progress>, BaseRepository<Progress>>();
+            services.AddScoped<IBaseRepository<Request>, BaseRepository<Request>>();
+            services.AddScoped<IBaseRepository<State>, BaseRepository<State>>();
+            services.AddScoped<IBaseRepository<StateUser>, BaseRepository<StateUser>>();
+
             services.AddScoped<IWorkflowEngineUnitOfWork, WorkflowEngineUnitOfWork>();
+            
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IWorkflowEngineService, WorkflowEngineService>();
         }
