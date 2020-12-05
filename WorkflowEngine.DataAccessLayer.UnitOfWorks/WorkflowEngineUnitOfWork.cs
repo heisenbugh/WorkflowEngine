@@ -1,4 +1,4 @@
-﻿using Haskap.LayeredArchitecture.DataAccessLayer.UnitOfWork;
+﻿using Haskap.LayeredArchitecture.DataAccess.UnitOfWork;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;

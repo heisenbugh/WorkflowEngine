@@ -1,4 +1,4 @@
-﻿using Haskap.LayeredArchitecture.DataAccessLayer.Repositories;
+﻿using Haskap.LayeredArchitecture.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;

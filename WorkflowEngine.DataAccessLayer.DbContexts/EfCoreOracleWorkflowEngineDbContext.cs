@@ -1,4 +1,4 @@
-﻿using Haskap.LayeredArchitecture.DataAccessLayer.DbContexts.OraclelDbContext;
+﻿using Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

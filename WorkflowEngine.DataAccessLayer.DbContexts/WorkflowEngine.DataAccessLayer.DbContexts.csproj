@@ -50,11 +50,11 @@
     <Reference Include="Haskap.LayeredArchitecture.Core">
       <HintPath>..\References\Haskap.LayeredArchitecture.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Haskap.LayeredArchitecture.DataAccessLayer.DbContexts.OraclelDbContext">
-      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccessLayer.DbContexts.OraclelDbContext.dll</HintPath>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext.dll</HintPath>
     </Reference>
-    <Reference Include="Haskap.LayeredArchitecture.DataAccessLayer.EntityConfiguration">
-      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccessLayer.EntityConfiguration.dll</HintPath>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccess.EntityConfiguration">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.EntityConfiguration.dll</HintPath>
     </Reference>
   </ItemGroup>
 

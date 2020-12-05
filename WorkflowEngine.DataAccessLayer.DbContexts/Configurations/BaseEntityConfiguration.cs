@@ -1,4 +1,4 @@
-﻿using Haskap.LayeredArchitecture.DataAccessLayer.EntityConfiguration;
+﻿using Haskap.LayeredArchitecture.DataAccess.EntityConfiguration;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using WorkflowEngine.Core.Entities;
