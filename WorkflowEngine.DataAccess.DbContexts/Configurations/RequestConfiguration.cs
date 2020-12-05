@@ -2,25 +2,31 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using WorkflowEngine.Core.Entities;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Configurations
+namespace WorkflowEngine.DataAccess.DbContexts.Configurations
 {
-    public class StateUserConfiguration : BaseEntityConfiguration<StateUser>
+    public class RequestConfiguration : BaseEntityConfiguration<Request>
     {
-        public override void Configure(EntityTypeBuilder<StateUser> builder)
+        public override void Configure(EntityTypeBuilder<Request> builder)
         {
             base.Configure(builder); // Must call this
 
-            builder.HasOne(x => x.State)
-                .WithMany(x => x.StateUsers)
-                .HasForeignKey(x => x.StateId)
+            builder.HasOne(x => x.RequestedBy)
+                .WithMany(x => x.Requests)
+                .HasForeignKey(x => x.RequestedById)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.User)
-                .WithMany(x => x.StateUsers)
-                .HasForeignKey(x => x.UserId)
+            builder.HasOne(ur => ur.CurrentState)
+                .WithMany(u => u.Requests)
+                .HasForeignKey(ur => ur.CurrentStateId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.HasOne(x => x.Data)
+                .WithOne(x => x.Request)
+                .HasForeignKey<RequestData>(x => x.RequestId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             //builder.Property(x => x.Id).ValueGeneratedOnAdd();

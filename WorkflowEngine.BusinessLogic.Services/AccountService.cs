@@ -7,7 +7,7 @@ using WorkflowEngine.Core.Entities;
 using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
 
-namespace WorkflowEngine.BussinessLogicLayer.Services
+namespace WorkflowEngine.BusinessLogic.Services
 {
     public class AccountService : BaseService<IWorkflowEngineUnitOfWork>, IAccountService
     {

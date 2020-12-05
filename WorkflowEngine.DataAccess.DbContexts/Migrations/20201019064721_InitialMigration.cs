@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Migrations
+namespace WorkflowEngine.DataAccess.DbContexts.Migrations
 {
     public partial class InitialMigration : Migration
     {

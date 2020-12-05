@@ -1,32 +1,32 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using WorkflowEngine.Core.Entities;
-using Microsoft.EntityFrameworkCore;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Configurations
+namespace WorkflowEngine.DataAccess.DbContexts.Configurations
 {
-    public class PathConfiguration : BaseEntityConfiguration<Path>
+    public class ProgressConfiguration : BaseEntityConfiguration<Progress>
     {
-        public override void Configure(EntityTypeBuilder<Path> builder)
+        public override void Configure(EntityTypeBuilder<Progress> builder)
         {
             base.Configure(builder); // Must call this
 
-            builder.HasOne(x => x.Action)
-                .WithMany(x => x.Paths)
-                .HasForeignKey(x => x.ActionId)
+            builder.HasOne(x => x.Request)
+                .WithMany(x => x.Progress)
+                .HasForeignKey(x => x.RequestId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.FromState)
-                .WithMany(x => x.FromPaths)
-                .HasForeignKey(x => x.FromStateId)
-                .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Path)
+                .WithMany(x => x.Progress)
+                .HasForeignKey(x => x.PathId)
+                .OnDelete(DeleteBehavior.SetNull);
 
-            builder.HasOne(x => x.ToState)
-               .WithMany(x => x.ToPaths)
-               .HasForeignKey(x => x.ToStateId)
-               .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.ProgressedBy)
+               .WithMany(x => x.Progress)
+               .HasForeignKey(x => x.ProgressedById)
+               .OnDelete(DeleteBehavior.SetNull);
 
             //builder.HasOne(ur => ur.User)
             //    .WithMany(u => u.UserRoles)

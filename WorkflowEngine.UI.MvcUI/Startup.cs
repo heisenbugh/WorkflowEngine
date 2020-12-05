@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WorkflowEngine.BussinessLogicLayer.Services;
+using WorkflowEngine.BusinessLogic.Services;
 using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
-using WorkflowEngine.DataAccessLayer.DbContexts;
-using WorkflowEngine.DataAccessLayer.UnitOfWorks;
+using WorkflowEngine.DataAccess.DbContexts;
+using WorkflowEngine.DataAccess.UnitOfWorks;
 using WorkflowEngine.Core.Repositories;
 using WorkflowEngine.Core.Entities;
-using WorkflowEngine.DataAccessLayer.Repositories;
+using WorkflowEngine.DataAccess.Repositories;
 
 namespace WorkflowEngine.UI.MvcUI
 {

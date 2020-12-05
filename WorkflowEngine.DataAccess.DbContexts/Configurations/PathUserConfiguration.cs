@@ -5,32 +5,23 @@ using System.Collections.Generic;
 using System.Text;
 using WorkflowEngine.Core.Entities;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Configurations
+namespace WorkflowEngine.DataAccess.DbContexts.Configurations
 {
-    public class ProgressConfiguration : BaseEntityConfiguration<Progress>
+    public class PathUserConfiguration : BaseEntityConfiguration<PathUser>
     {
-        public override void Configure(EntityTypeBuilder<Progress> builder)
+        public override void Configure(EntityTypeBuilder<PathUser> builder)
         {
             base.Configure(builder); // Must call this
 
-            builder.HasOne(x => x.Request)
-                .WithMany(x => x.Progress)
-                .HasForeignKey(x => x.RequestId)
+            builder.HasOne(x => x.Path)
+                .WithMany(x => x.PathUsers)
+                .HasForeignKey(x => x.PathId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.Path)
-                .WithMany(x => x.Progress)
-                .HasForeignKey(x => x.PathId)
-                .OnDelete(DeleteBehavior.SetNull);
-
-            builder.HasOne(x => x.ProgressedBy)
-               .WithMany(x => x.Progress)
-               .HasForeignKey(x => x.ProgressedById)
-               .OnDelete(DeleteBehavior.SetNull);
-
-            //builder.HasOne(ur => ur.User)
-            //    .WithMany(u => u.UserRoles)
-            //    .HasForeignKey(ur => ur.UserId);
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.PathUsers)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             //builder.Property(x => x.Id).ValueGeneratedOnAdd();
             //builder.Property(x => x.ClusteredIndex).UseIdentityAlwaysColumn();

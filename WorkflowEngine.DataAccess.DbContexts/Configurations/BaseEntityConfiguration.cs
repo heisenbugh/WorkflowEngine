@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using WorkflowEngine.Core.Entities;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Configurations
+namespace WorkflowEngine.DataAccess.DbContexts.Configurations
 {
     public class BaseEntityConfiguration<TEntity> : BaseEntityConfiguration<TEntity, Guid>
         where TEntity : BaseEntity

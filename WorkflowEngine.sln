@@ -5,23 +5,23 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{04099DFE-BA75-4A99-85E0-0F65A5E8716B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccessLayer", "DataAccessLayer", "{BB33383A-62AA-4C59-A8A1-12A302EC1A4A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{BB33383A-62AA-4C59-A8A1-12A302EC1A4A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BussinessLogicLayer", "BussinessLogicLayer", "{061A4FEA-D2F0-48A5-A0C8-2D34DF5C5D20}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{061A4FEA-D2F0-48A5-A0C8-2D34DF5C5D20}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.Core", "WorkflowEngine.Core\WorkflowEngine.Core.csproj", "{66AB2525-E732-4802-85D2-E97E8C4A3660}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.DataAccessLayer.DbContexts", "WorkflowEngine.DataAccessLayer.DbContexts\WorkflowEngine.DataAccessLayer.DbContexts.csproj", "{338DC80D-6A01-4DEE-8BBF-528381ED5FF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.DataAccess.DbContexts", "WorkflowEngine.DataAccess.DbContexts\WorkflowEngine.DataAccess.DbContexts.csproj", "{338DC80D-6A01-4DEE-8BBF-528381ED5FF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.BussinessLogicLayer.Services", "WorkflowEngine.BussinessLogicLayer.Services\WorkflowEngine.BussinessLogicLayer.Services.csproj", "{10F1BC5A-5E3F-4807-ADCF-BB1F2C6B50F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.BusinessLogic.Services", "WorkflowEngine.BusinessLogic.Services\WorkflowEngine.BusinessLogic.Services.csproj", "{10F1BC5A-5E3F-4807-ADCF-BB1F2C6B50F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{F626BD82-49DB-4DBE-846D-1AABA5E57302}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.UI.MvcUI", "WorkflowEngine.UI.MvcUI\WorkflowEngine.UI.MvcUI.csproj", "{CBF4C991-4EE9-4A29-BAE4-97DC28C6C385}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowEngine.DataAccessLayer.UnitOfWorks", "WorkflowEngine.DataAccessLayer.UnitOfWorks\WorkflowEngine.DataAccessLayer.UnitOfWorks.csproj", "{82CA200C-5F52-4100-89E3-09924763910A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.DataAccess.UnitOfWorks", "WorkflowEngine.DataAccess.UnitOfWorks\WorkflowEngine.DataAccess.UnitOfWorks.csproj", "{82CA200C-5F52-4100-89E3-09924763910A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowEngine.DataAccessLayer.Repositories", "WorkflowEngine.DataAccessLayer.Repositories\WorkflowEngine.DataAccessLayer.Repositories.csproj", "{B3480635-835D-4F90-B808-8AC5DFC96544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.DataAccess.Repositories", "WorkflowEngine.DataAccess.Repositories\WorkflowEngine.DataAccess.Repositories.csproj", "{B3480635-835D-4F90-B808-8AC5DFC96544}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

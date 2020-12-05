@@ -5,22 +5,22 @@ using System.Collections.Generic;
 using System.Text;
 using WorkflowEngine.Core.Entities;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Configurations
+namespace WorkflowEngine.DataAccess.DbContexts.Configurations
 {
-    public class ProcessAdminConfiguration : BaseEntityConfiguration<ProcessAdmin>
+    public class StateUserConfiguration : BaseEntityConfiguration<StateUser>
     {
-        public override void Configure(EntityTypeBuilder<ProcessAdmin> builder)
+        public override void Configure(EntityTypeBuilder<StateUser> builder)
         {
             base.Configure(builder); // Must call this
 
-            builder.HasOne(x => x.Process)
-                .WithMany(x => x.ProcessAdmins)
-                .HasForeignKey(x => x.ProcessId)
+            builder.HasOne(x => x.State)
+                .WithMany(x => x.StateUsers)
+                .HasForeignKey(x => x.StateId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.Admin)
-                .WithMany(x => x.ProcessAdmins)
-                .HasForeignKey(x => x.AdminId)
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.StateUsers)
+                .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             //builder.Property(x => x.Id).ValueGeneratedOnAdd();

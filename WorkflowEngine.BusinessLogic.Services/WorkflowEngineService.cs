@@ -10,7 +10,7 @@ using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace WorkflowEngine.BussinessLogicLayer.Services
+namespace WorkflowEngine.BusinessLogic.Services
 {
     public class WorkflowEngineService : BaseService<IWorkflowEngineUnitOfWork>, IWorkflowEngineService
     {
