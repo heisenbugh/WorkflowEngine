@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
-using WorkflowEngine.DataAccessLayer.DbContexts;
+using WorkflowEngine.DataAccess.DbContexts;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Migrations
+namespace WorkflowEngine.DataAccess.DbContexts.Migrations
 {
     [DbContext(typeof(EfCoreOracleWorkflowEngineDbContext))]
     [Migration("20201019064721_InitialMigration")]

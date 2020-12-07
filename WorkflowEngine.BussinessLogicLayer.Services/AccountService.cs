@@ -1,4 +1,4 @@
-﻿using Haskap.LayeredArchitecture.BussinessLogicLayer.Services;
+﻿using Haskap.LayeredArchitecture.BusinessLogic.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +7,7 @@ using WorkflowEngine.Core.Entities;
 using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
 
-namespace WorkflowEngine.BussinessLogicLayer.Services
+namespace WorkflowEngine.BusinessLogic.Services
 {
     public class AccountService : BaseService<IWorkflowEngineUnitOfWork>, IAccountService
     {

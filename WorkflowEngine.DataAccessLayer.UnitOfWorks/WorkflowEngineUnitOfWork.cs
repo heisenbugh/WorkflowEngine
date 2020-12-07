@@ -1,4 +1,4 @@
-﻿using Haskap.LayeredArchitecture.DataAccessLayer.UnitOfWork;
+﻿using Haskap.LayeredArchitecture.DataAccess.UnitOfWork;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -6,10 +6,10 @@ using System.Text;
 using WorkflowEngine.Core.Entities;
 using WorkflowEngine.Core.Repositories;
 using WorkflowEngine.Core.UnitOfWork;
-using WorkflowEngine.DataAccessLayer.DbContexts;
-using WorkflowEngine.DataAccessLayer.Repositories;
+using WorkflowEngine.DataAccess.DbContexts;
+using WorkflowEngine.DataAccess.Repositories;
 
-namespace WorkflowEngine.DataAccessLayer.UnitOfWorks
+namespace WorkflowEngine.DataAccess.UnitOfWorks
 {
     public class WorkflowEngineUnitOfWork : BaseUnitOfWork<EfCoreOracleWorkflowEngineDbContext>, IWorkflowEngineUnitOfWork
     {

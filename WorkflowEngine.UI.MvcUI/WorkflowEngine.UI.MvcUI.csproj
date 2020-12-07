@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>1a80563b-6b58-4517-b19c-6f391a5531bf</UserSecretsId>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,26 +16,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkflowEngine.BussinessLogicLayer.Services\WorkflowEngine.BussinessLogicLayer.Services.csproj" />
+    <ProjectReference Include="..\WorkflowEngine.BussinessLogicLayer.Services\WorkflowEngine.BusinessLogic.Services.csproj" />
     <ProjectReference Include="..\WorkflowEngine.Core\WorkflowEngine.Core.csproj" />
-    <ProjectReference Include="..\WorkflowEngine.DataAccessLayer.UnitOfWorks\WorkflowEngine.DataAccessLayer.UnitOfWorks.csproj" />
+    <ProjectReference Include="..\WorkflowEngine.DataAccessLayer.UnitOfWorks\WorkflowEngine.DataAccess.UnitOfWorks.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Haskap.LayeredArchitecture.BussinessLogicLayer.Services">
-      <HintPath>..\References\Haskap.LayeredArchitecture.BussinessLogicLayer.Services.dll</HintPath>
+    <Reference Include="Haskap.LayeredArchitecture.BusinessLogic.Services">
+      <HintPath>..\References\Haskap.LayeredArchitecture.BusinessLogic.Services.dll</HintPath>
     </Reference>
     <Reference Include="Haskap.LayeredArchitecture.Core">
       <HintPath>..\References\Haskap.LayeredArchitecture.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Haskap.LayeredArchitecture.DataAccessLayer.DbContexts.OraclelDbContext">
-      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccessLayer.DbContexts.OraclelDbContext.dll</HintPath>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext.dll</HintPath>
     </Reference>
-    <Reference Include="Haskap.LayeredArchitecture.DataAccessLayer.Repositories">
-      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccessLayer.Repositories.dll</HintPath>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccess.Repositories">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.Repositories.dll</HintPath>
     </Reference>
-    <Reference Include="Haskap.LayeredArchitecture.DataAccessLayer.UnitOfWork">
-      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccessLayer.UnitOfWork.dll</HintPath>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccess.UnitOfWork">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.UnitOfWork.dll</HintPath>
     </Reference>
   </ItemGroup>
 

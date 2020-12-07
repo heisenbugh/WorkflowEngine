@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using WorkflowEngine.Core.Entities;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Configurations
+namespace WorkflowEngine.DataAccess.DbContexts.Configurations
 {
     public class PathUserConfiguration : BaseEntityConfiguration<PathUser>
     {

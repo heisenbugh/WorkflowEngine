@@ -1,12 +1,12 @@
-﻿using Haskap.LayeredArchitecture.DataAccessLayer.DbContexts.OraclelDbContext;
+﻿using Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using WorkflowEngine.Core.Entities;
-using WorkflowEngine.DataAccessLayer.DbContexts.Configurations;
+using WorkflowEngine.DataAccess.DbContexts.Configurations;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts
+namespace WorkflowEngine.DataAccess.DbContexts
 {
     public class EfCoreOracleWorkflowEngineDbContext : BaseEfCoreOracleDbContext
     {

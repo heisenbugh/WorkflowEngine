@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using WorkflowEngine.Core.Entities;
 
-namespace WorkflowEngine.DataAccessLayer.DbContexts.Configurations
+namespace WorkflowEngine.DataAccess.DbContexts.Configurations
 {
     public class ProcessConfiguration : BaseEntityConfiguration<Process>
     {
