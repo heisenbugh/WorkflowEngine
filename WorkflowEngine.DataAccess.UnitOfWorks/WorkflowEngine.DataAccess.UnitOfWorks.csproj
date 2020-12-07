@@ -1,12 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkflowEngine.Core\WorkflowEngine.Core.csproj" />
-    <ProjectReference Include="..\WorkflowEngine.DataAccessLayer.DbContexts\WorkflowEngine.DataAccess.DbContexts.csproj" />
+    <ProjectReference Include="..\WorkflowEngine.DataAccess.Repositories\WorkflowEngine.DataAccess.Repositories.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +17,9 @@
     </Reference>
     <Reference Include="Haskap.LayeredArchitecture.DataAccess.Repositories">
       <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.Repositories.dll</HintPath>
+    </Reference>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccess.UnitOfWork">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.UnitOfWork.dll</HintPath>
     </Reference>
   </ItemGroup>
 
