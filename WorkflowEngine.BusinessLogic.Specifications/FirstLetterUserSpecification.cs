@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Haskap.LayeredArchitecture.Core.Specifications;
+using System;
 using System.Linq.Expressions;
 using WorkflowEngine.Core.Entities;
-using WorkflowEngine.Core.Specifications;
 
 namespace WorkflowEngine.BusinessLogic.Specifications
 {
