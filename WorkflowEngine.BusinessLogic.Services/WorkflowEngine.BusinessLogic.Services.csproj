@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WorkflowEngine.BusinessLogic.Specifications\WorkflowEngine.BusinessLogic.Specifications.csproj" />
     <ProjectReference Include="..\WorkflowEngine.Core\WorkflowEngine.Core.csproj" />
   </ItemGroup>
 

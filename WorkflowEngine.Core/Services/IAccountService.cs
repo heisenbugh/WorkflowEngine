@@ -8,5 +8,7 @@ namespace WorkflowEngine.Core.Services
     public interface IAccountService : IBaseService
     {
         void AddUser(AddUserInputDto addUserInputDto);
+
+        IList<HasanUserDto> GetHasanUserList();
     }
 }

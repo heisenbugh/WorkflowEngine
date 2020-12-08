@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.DataAccess.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowEngine.DataAccess.Repositories", "WorkflowEngine.DataAccess.Repositories\WorkflowEngine.DataAccess.Repositories.csproj", "{B3480635-835D-4F90-B808-8AC5DFC96544}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowEngine.BusinessLogic.Specifications", "WorkflowEngine.BusinessLogic.Specifications\WorkflowEngine.BusinessLogic.Specifications.csproj", "{8ECA6DF9-1843-49B5-824A-E15F2997F4F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{B3480635-835D-4F90-B808-8AC5DFC96544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3480635-835D-4F90-B808-8AC5DFC96544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3480635-835D-4F90-B808-8AC5DFC96544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ECA6DF9-1843-49B5-824A-E15F2997F4F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ECA6DF9-1843-49B5-824A-E15F2997F4F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ECA6DF9-1843-49B5-824A-E15F2997F4F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ECA6DF9-1843-49B5-824A-E15F2997F4F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{CBF4C991-4EE9-4A29-BAE4-97DC28C6C385} = {F626BD82-49DB-4DBE-846D-1AABA5E57302}
 		{82CA200C-5F52-4100-89E3-09924763910A} = {BB33383A-62AA-4C59-A8A1-12A302EC1A4A}
 		{B3480635-835D-4F90-B808-8AC5DFC96544} = {BB33383A-62AA-4C59-A8A1-12A302EC1A4A}
+		{8ECA6DF9-1843-49B5-824A-E15F2997F4F9} = {061A4FEA-D2F0-48A5-A0C8-2D34DF5C5D20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B2E0200-EAB0-4169-A1BC-395D77235D5D}

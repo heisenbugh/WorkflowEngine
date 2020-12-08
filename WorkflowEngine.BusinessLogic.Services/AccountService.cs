@@ -6,6 +6,8 @@ using WorkflowEngine.Core.Dtos;
 using WorkflowEngine.Core.Entities;
 using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
+using WorkflowEngine.BusinessLogic.Specifications;
+using System.Linq;
 
 namespace WorkflowEngine.BusinessLogic.Services
 {
@@ -25,6 +27,18 @@ namespace WorkflowEngine.BusinessLogic.Services
             };
             UnitOfWork.GetRepository<User>().Add(user);
             UnitOfWork.SaveChanges();
+        }
+
+        public IList<HasanUserDto> GetHasanUserList()
+        {
+            var specification = new FirstLetterUserSpecification();
+            var hasanUserDtos = UnitOfWork.GetRepository<User>().GetMany(specification.ToExpression(), string.Empty).Select(x=> new HasanUserDto { 
+                Id = x.Id,
+                FirstName=x.FirstName,
+                LastName=x.LastName
+            });
+
+            return hasanUserDtos.ToList();
         }
     }
 }
