@@ -5,11 +5,11 @@ using WorkflowEngine.Core.Entities;
 
 namespace WorkflowEngine.BusinessLogic.Specifications
 {
-    public class FirstLetterUserSpecification : Specification<User>
+    public class UserLastNameStartsWithSpecification : Specification<User>
     {
         public override Expression<Func<User, bool>> ToExpression()
         {
-            return user => user.FirstName.StartsWith("h");
+            return user => user.LastName.StartsWith("k");
         }
     }
 }

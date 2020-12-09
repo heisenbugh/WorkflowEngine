@@ -8,6 +8,7 @@ using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
 using WorkflowEngine.BusinessLogic.Specifications;
 using System.Linq;
+using Haskap.LayeredArchitecture.Core.Specifications;
 
 namespace WorkflowEngine.BusinessLogic.Services
 {
@@ -31,8 +32,9 @@ namespace WorkflowEngine.BusinessLogic.Services
 
         public IList<HasanUserDto> GetHasanUserList()
         {
-            var specification = new FirstLetterUserSpecification();
-            var hasanUserDtos = UnitOfWork.GetRepository<User>().GetMany(specification.ToExpression(), string.Empty).Select(x=> new HasanUserDto { 
+            var userFirstNameStartsWithSpecification = new UserFirstNameStartsWithSpecification();
+            var userLastNameStartsWithSpecification = new UserLastNameStartsWithSpecification();
+            var hasanUserDtos = UnitOfWork.GetRepository<User>().GetMany(userFirstNameStartsWithSpecification.And(userLastNameStartsWithSpecification), string.Empty).Select(x=> new HasanUserDto { 
                 Id = x.Id,
                 FirstName=x.FirstName,
                 LastName=x.LastName
