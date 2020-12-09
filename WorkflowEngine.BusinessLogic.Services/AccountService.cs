@@ -35,11 +35,13 @@ namespace WorkflowEngine.BusinessLogic.Services
         {
             var userFirstNameStartsWithSpecification = new UserFirstNameStartsWithSpecification();
             var userLastNameStartsWithSpecification = new UserLastNameStartsWithSpecification();
-            var hasanUserDtos = this.unitOfWork.GetRepository<User>().GetMany(userFirstNameStartsWithSpecification.And(userLastNameStartsWithSpecification), string.Empty).Select(x=> new HasanUserDto { 
-                Id = x.Id,
-                FirstName=x.FirstName,
-                LastName=x.LastName
-            });
+            var hasanUserDtos = this.unitOfWork.GetRepository<User>().GetMany(userFirstNameStartsWithSpecification.And(userLastNameStartsWithSpecification), string.Empty)
+                .Select(x => new HasanUserDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName
+                });
 
             return hasanUserDtos.ToList();
         }
