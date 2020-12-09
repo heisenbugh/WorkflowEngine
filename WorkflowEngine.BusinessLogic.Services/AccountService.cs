@@ -12,11 +12,12 @@ using Haskap.LayeredArchitecture.Core.Specifications;
 
 namespace WorkflowEngine.BusinessLogic.Services
 {
-    public class AccountService : BaseService<IWorkflowEngineUnitOfWork>, IAccountService
+    public class AccountService : BaseService, IAccountService
     {
-        public AccountService(IWorkflowEngineUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly IWorkflowEngineUnitOfWork unitOfWork;
+        public AccountService(IWorkflowEngineUnitOfWork unitOfWork)
         {
-
+            this.unitOfWork = unitOfWork;
         }
 
         public void AddUser(AddUserInputDto addUserInputDto)
@@ -26,15 +27,15 @@ namespace WorkflowEngine.BusinessLogic.Services
                 FirstName = addUserInputDto.FirstName,
                 LastName = addUserInputDto.LastName
             };
-            UnitOfWork.GetRepository<User>().Add(user);
-            UnitOfWork.SaveChanges();
+            this.unitOfWork.GetRepository<User>().Add(user);
+            this.unitOfWork.SaveChanges();
         }
 
         public IList<HasanUserDto> GetHasanUserList()
         {
             var userFirstNameStartsWithSpecification = new UserFirstNameStartsWithSpecification();
             var userLastNameStartsWithSpecification = new UserLastNameStartsWithSpecification();
-            var hasanUserDtos = UnitOfWork.GetRepository<User>().GetMany(userFirstNameStartsWithSpecification.And(userLastNameStartsWithSpecification), string.Empty).Select(x=> new HasanUserDto { 
+            var hasanUserDtos = this.unitOfWork.GetRepository<User>().GetMany(userFirstNameStartsWithSpecification.And(userLastNameStartsWithSpecification), string.Empty).Select(x=> new HasanUserDto { 
                 Id = x.Id,
                 FirstName=x.FirstName,
                 LastName=x.LastName
