@@ -27,11 +27,16 @@ namespace WorkflowEngine.BusinessLogic.Services
             return this.unitOfWork.GetRepository<Request>().Get(x => x.Id == requestId, e => e.Include(x => x.CurrentState)).CurrentState;
         }
 
+        public bool IsProcessAdmin(Guid processId, Guid userId)
+        {
+            return this.unitOfWork.GetRepository<ProcessAdmin>().Exists(new ProcessAdminSpecification(processId, userId), string.Empty);
+        }
+
         public State GetRequestNextState(Guid requestId, string actionCodeName, Guid userId)
         {
             var request = this.unitOfWork.GetRepository<Request>().GetById(requestId);
             State nextState;
-            var isProcessAdmin = this.unitOfWork.GetRepository<ProcessAdmin>().Exists(x => x.AdminId == userId && x.ProcessId == request.ProcessId, string.Empty);
+            var isProcessAdmin = IsProcessAdmin(request.ProcessId.Value, userId);
             if (isProcessAdmin == true)
             {
                 var path = this.unitOfWork.GetRepository<Path>().Get(x => x.FromStateId == request.CurrentStateId && x.Action.CodeName == actionCodeName, "Action,ToState");
@@ -90,7 +95,7 @@ namespace WorkflowEngine.BusinessLogic.Services
             var request = this.unitOfWork.GetRepository<Request>().GetById(requestId);
             var paths = this.unitOfWork.GetRepository<Path>().GetMany(x => x.FromStateId == request.CurrentStateId, e => e.Include(x => x.Action).Include(x => x.ToState).Include(x => x.FromState));
             var authorizedPossiblePaths = paths;
-            var isProcessAdmin = this.unitOfWork.GetRepository<ProcessAdmin>().Exists(x => x.AdminId == userId && x.ProcessId == request.ProcessId, string.Empty);
+            var isProcessAdmin = IsProcessAdmin(request.ProcessId.Value, userId);
 
             if (isProcessAdmin == false)
             {
