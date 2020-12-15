@@ -9,6 +9,7 @@ using WorkflowEngine.Core.Entities;
 using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
 using Microsoft.EntityFrameworkCore;
+using WorkflowEngine.BusinessLogic.Specifications;
 
 namespace WorkflowEngine.BusinessLogic.Services
 {
@@ -57,7 +58,7 @@ namespace WorkflowEngine.BusinessLogic.Services
 
         public State GetStartState(Guid processId)
         {
-            return this.unitOfWork.GetRepository<State>().Get(x => x.ProcessId == processId && x.CodeName == "StartState", string.Empty);
+            return this.unitOfWork.GetRepository<State>().Get(new StartStateSpecification(processId), x => x.Include(state => state.StateType));
         }
 
         public Progress SaveProgress(Guid requestId, string actionCodeName, Guid userId, string message, RequestData data)

@@ -30,6 +30,8 @@ namespace WorkflowEngine.DataAccess.DbContexts
         {
             base.OnModelCreating(builder);
 
+            builder.ApplyConfiguration(new StateConfiguration());
+            builder.ApplyConfiguration(new ActionConfiguration());
             builder.ApplyConfiguration(new ProcessConfiguration());
             builder.ApplyConfiguration(new PathConfiguration());
             builder.ApplyConfiguration(new ProgressConfiguration());
