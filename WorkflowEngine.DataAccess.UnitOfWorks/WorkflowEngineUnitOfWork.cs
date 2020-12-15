@@ -16,7 +16,7 @@ namespace WorkflowEngine.DataAccess.UnitOfWorks
         public IBaseRepository<TEntity> GetRepository<TEntity>()
             where TEntity : BaseEntity
         {
-            var repository = this.dbContext.GetService<IBaseRepository<TEntity>>();
+            var repository = this.DbContext.GetService<IBaseRepository<TEntity>>();
             if (repository != null)
             {
                 return repository;
