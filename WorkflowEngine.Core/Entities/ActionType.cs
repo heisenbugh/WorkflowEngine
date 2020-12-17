@@ -8,6 +8,7 @@ namespace WorkflowEngine.Core.Entities
 {
     public class ActionType : BaseEntity
     {
+        //RestartAction, NormalAction
         public string Name { get; set; }
         public ICollection<Action> Actions { get; set; }
     }
