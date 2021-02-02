@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkflowEngine.Core.Validations;
 
 namespace WorkflowEngine.Core.Entities
 {
@@ -17,7 +18,9 @@ namespace WorkflowEngine.Core.Entities
 
         public bool IsValid()
         {
-            return address.Length == 10;
+            var validator = new SmsNotificationAddressValidator();
+            var validationResult = validator.Validate(address);
+            return validationResult.IsValid;
         }
 
         public static implicit operator string(SmsNotificationAddress smsNotificationAddress)

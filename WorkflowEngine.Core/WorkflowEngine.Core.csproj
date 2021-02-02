@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Haskap.LayeredArchitecture.Core">
       <HintPath>..\References\Haskap.LayeredArchitecture.Core.dll</HintPath>
     </Reference>
