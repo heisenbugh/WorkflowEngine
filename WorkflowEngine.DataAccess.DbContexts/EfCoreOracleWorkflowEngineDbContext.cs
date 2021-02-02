@@ -20,6 +20,7 @@ namespace WorkflowEngine.DataAccess.DbContexts
         public DbSet<PathUser> PathUser { get; set; }
         public DbSet<StateUser> StateUser { get; set; }
         public DbSet<ProcessAdmin> ProcessAdmin { get; set; }
+        public DbSet<Notification> Notification { get; set; }
 
         public EfCoreOracleWorkflowEngineDbContext(DbContextOptions<EfCoreOracleWorkflowEngineDbContext> options) : base(options)
         {
@@ -39,6 +40,7 @@ namespace WorkflowEngine.DataAccess.DbContexts
             builder.ApplyConfiguration(new PathUserConfiguration());
             builder.ApplyConfiguration(new StateUserConfiguration());
             builder.ApplyConfiguration(new ProcessAdminConfiguration());
+            builder.ApplyConfiguration(new NotificationConfiguration());
         }
     }
 }
