@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WorkflowEngine.Core.Entities
 {
-    public class Notification : BaseEntity
+    public class NotificationTemplate : BaseEntity
     {
         private List<EmailNotificationAddress> validatedToAddresses;
         private List<EmailNotificationAddress> validatedCcAddresses;
@@ -22,7 +22,7 @@ namespace WorkflowEngine.Core.Entities
         public IReadOnlyCollection<SmsNotificationAddress> GsmNumbers { get; set; }
         public bool IsActive { get; set; }
 
-        public Notification()
+        public NotificationTemplate()
         {
             validatedToAddresses = new List<EmailNotificationAddress>();
             ToAddresses = validatedToAddresses.AsReadOnly();

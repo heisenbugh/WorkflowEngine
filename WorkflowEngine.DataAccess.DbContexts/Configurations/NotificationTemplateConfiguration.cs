@@ -10,9 +10,9 @@ using WorkflowEngine.Core.Entities;
 
 namespace WorkflowEngine.DataAccess.DbContexts.Configurations
 {
-    public class NotificationConfiguration : BaseEntityConfiguration<Notification>
+    public class NotificationTemplateConfiguration : BaseEntityConfiguration<NotificationTemplate>
     {
-        public override void Configure(EntityTypeBuilder<Notification> builder)
+        public override void Configure(EntityTypeBuilder<NotificationTemplate> builder)
         {
             base.Configure(builder); // Must call this
 
