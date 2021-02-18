@@ -11,8 +11,8 @@ namespace WorkflowEngine.Core.Entities
         public Guid? ProcessId { get; set; }
         public Process Process { get; set; }
         public DateTime RequestDate { get; set; }
-        public Guid RequestedById { get; set; }
-        public User RequestedBy { get; set; }
+        public Guid OwnerId { get; set; }
+        public User Owner { get; set; }
         public Guid? CurrentStateId { get; set; }
         public State CurrentState { get; set; }
         public IList<Progress> Progress { get; set; }

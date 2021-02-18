@@ -14,9 +14,9 @@ namespace WorkflowEngine.DataAccess.DbContexts.Configurations
         {
             base.Configure(builder); // Must call this
 
-            builder.HasOne(x => x.RequestedBy)
+            builder.HasOne(x => x.Owner)
                 .WithMany(x => x.Requests)
-                .HasForeignKey(x => x.RequestedById)
+                .HasForeignKey(x => x.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(ur => ur.CurrentState)
