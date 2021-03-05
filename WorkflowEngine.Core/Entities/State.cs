@@ -15,7 +15,6 @@ namespace WorkflowEngine.Core.Entities
         public IList<Path> ToPaths { get; set; }
         public IList<StateUser> StateUsers { get; set; }
         public IList<Request> Requests { get; set; }
-        public Guid? StateTypeId { get; set; }
         public StateType StateType { get; set; }
     }
 }

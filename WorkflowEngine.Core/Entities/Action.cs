@@ -11,7 +11,6 @@ namespace WorkflowEngine.Core.Entities
         public Guid? ProcessId { get; set; }
         public Process Process { get; set; }
         public IList<Path> Paths { get; set; }
-        public Guid? ActionTypeId { get; set; }
         public ActionType ActionType { get; set; }
     }
 }

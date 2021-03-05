@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace WorkflowEngine.Core.Entities
 {
-    public class ActionType : BaseEntity
+    public enum ActionType
     {
-        //RestartAction, NormalAction
-        public string Name { get; set; }
-        public ICollection<Action> Actions { get; set; }
+        RestartAction,
+        NormalAction
     }
 }

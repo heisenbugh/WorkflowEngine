@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace WorkflowEngine.Core.Entities
 {
-    public class StateType : BaseEntity
+    public enum StateType
     {
-        // StartState, EndState, NormalState, RecursiveState
-        public string Name { get; set; }
-        public ICollection<State> States { get; set; }
+        StartState, 
+        EndState, 
+        NormalState, 
+        RecursiveState
     }
 }

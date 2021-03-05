@@ -20,7 +20,7 @@ namespace WorkflowEngine.BusinessLogic.Specifications
 
         public override Expression<Func<State, bool>> ToExpression()
         {
-            return state => state.ProcessId == this.processId && state.StateType.Name == "StartState";
+            return state => state.ProcessId == this.processId && state.StateType == StateType.StartState;
         }
     }
 }

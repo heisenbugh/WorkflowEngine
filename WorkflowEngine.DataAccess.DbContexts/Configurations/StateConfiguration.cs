@@ -15,10 +15,8 @@ namespace WorkflowEngine.DataAccess.DbContexts.Configurations
         {
             base.Configure(builder); // Must call this
 
-            builder.HasOne(x => x.StateType)
-                .WithMany(x => x.States)
-                .HasForeignKey(x => x.StateTypeId)
-                .OnDelete(DeleteBehavior.SetNull);
+            builder.Property(e => e.StateType)
+                .HasConversion<string>();
         }
     }
 }

@@ -63,7 +63,7 @@ namespace WorkflowEngine.BusinessLogic.Services
 
         public State GetStartState(Guid processId)
         {
-            return this.unitOfWork.GetRepository<State>().Get(new StartStateSpecification(processId), x => x.Include(state => state.StateType));
+            return this.unitOfWork.GetRepository<State>().Get(new StartStateSpecification(processId), string.Empty);
         }
 
         public Progress SaveProgress(Guid requestId, string actionCodeName, Guid userId, string message, RequestData data)
@@ -93,9 +93,9 @@ namespace WorkflowEngine.BusinessLogic.Services
         public IList<Guid?> GetProgressedUserIdsForRecursiveState(Guid requestId)
         {
             var userIds = unitOfWork.GetRepository<Progress>().GetManyWhile(
-                whilePredicate: x => x.Path.Action.ActionType.Name == "RestartAction" || true,
+                whilePredicate: x => x.Path.Action.ActionType == ActionType.RestartAction || true,
                 where: x => x.RequestId == requestId && x.Path.FromStateId == x.Request.CurrentStateId && x.Path.ToStateId == x.Request.CurrentStateId,
-                include: x => x.Include(progress => progress.Path).ThenInclude(path => path.Action).ThenInclude(action => action.ActionType).Include(progress => progress.Request),
+                include: x => x.Include(progress => progress.Path).ThenInclude(path => path.Action).Include(progress => progress.Request),
                 orderBy: x => x.OrderByDescending(p => p.ProgressDate))
                 .Select(x => x.ProgressedById)
                 .ToList();
@@ -105,17 +105,17 @@ namespace WorkflowEngine.BusinessLogic.Services
 
         public IList<Path> GetPossibleRequestPaths(Guid requestId, Guid userId)
         {
-            var request = this.unitOfWork.GetRepository<Request>().Get(x => x.Id == requestId, x => x.Include(r => r.CurrentState).ThenInclude(cs => cs.StateType));
+            var request = this.unitOfWork.GetRepository<Request>().Get(x => x.Id == requestId, x => x.Include(r => r.CurrentState));
             var paths = this.unitOfWork.GetRepository<Path>().GetMany(
                 x => x.FromStateId == request.CurrentStateId,
                 e => e.Include(x => x.Action).ThenInclude(x => x.ActionType).Include(x => x.ToState).Include(x => x.FromState));
 
-            if (request.CurrentState.StateType.Name == "RecursiveState")
+            if (request.CurrentState.StateType == StateType.RecursiveState)
             {
                 var userIds = GetProgressedUserIdsForRecursiveState(requestId);
                 if (userIds.Contains(userId)) // eger bu userId daha once RecursiveState icin islem yapmissa
                 {
-                    paths = paths.Where(x => x.Action.ActionType.Name == "RestartAction" || x.ToStateId != request.CurrentStateId).ToList();
+                    paths = paths.Where(x => x.Action.ActionType == ActionType.RestartAction || x.ToStateId != request.CurrentStateId).ToList();
                 }
             }
 
