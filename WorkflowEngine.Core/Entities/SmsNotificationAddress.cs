@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WorkflowEngine.Core.Validations;
 
@@ -31,6 +32,11 @@ namespace WorkflowEngine.Core.Entities
         public static implicit operator SmsNotificationAddress(string address)
         {
             return new SmsNotificationAddress(address);
+        }
+
+        public string ToFormattedString()
+        {
+            return Regex.Replace(address, @"(\d{3})(\d{3})(\d{2})(\d{2})", "($1)-$2-$3-$4");
         }
     }
 }
