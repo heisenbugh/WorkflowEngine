@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\WorkflowEngine.BusinessLogic.Services\WorkflowEngine.BusinessLogic.Services.csproj" />
     <ProjectReference Include="..\WorkflowEngine.Core\WorkflowEngine.Core.csproj" />
-    <ProjectReference Include="..\WorkflowEngine.DataAccess.UnitOfWorks\WorkflowEngine.DataAccess.UnitOfWorks.csproj" />
   </ItemGroup>
 
   <ItemGroup>

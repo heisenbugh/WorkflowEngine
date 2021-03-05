@@ -6,47 +6,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using WorkflowEngine.Core.Entities;
-using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
 using Microsoft.EntityFrameworkCore;
 using WorkflowEngine.BusinessLogic.Specifications;
+using WorkflowEngine.DataAccess.DbContexts;
 
 namespace WorkflowEngine.BusinessLogic.Services
 {
     public class WorkflowEngineService : BaseService, IWorkflowEngineService
     {
-        private readonly IWorkflowEngineUnitOfWork unitOfWork;
+        private readonly EfCoreOracleWorkflowEngineDbContext workflowEngineDbContext;
 
-        public WorkflowEngineService(IWorkflowEngineUnitOfWork unitOfWork)
+        public WorkflowEngineService(EfCoreOracleWorkflowEngineDbContext workflowEngineDbContext)
         {
-            this.unitOfWork = unitOfWork;
+            this.workflowEngineDbContext = workflowEngineDbContext;
         }
 
         public State GetRequestCurrentState(Guid requestId)
         {
-            return this.unitOfWork.GetRepository<Request>().Get(x => x.Id == requestId, e => e.Include(x => x.CurrentState)).CurrentState;
+            return this.workflowEngineDbContext.Request
+                .Include(x => x.CurrentState)
+                .Where(x => x.Id == requestId)
+                .Select(x => x.CurrentState)
+                .Single();
         }
 
         public bool IsProcessAdmin(Guid processId, Guid userId)
         {
-            return this.unitOfWork.GetRepository<ProcessAdmin>().Exists(new ProcessAdminSpecification(processId, userId), string.Empty);
+            return this.workflowEngineDbContext.ProcessAdmin
+                .Any(new ProcessAdminSpecification(processId, userId));
         }
 
         public State GetRequestNextState(Guid requestId, string actionCodeName, Guid userId)
         {
-            var request = this.unitOfWork.GetRepository<Request>().GetById(requestId);
+            var request = this.workflowEngineDbContext.Request
+                .Find(requestId);
             State nextState;
             var isProcessAdmin = IsProcessAdmin(request.ProcessId.Value, userId);
             if (isProcessAdmin == true)
             {
-                var path = this.unitOfWork.GetRepository<Path>().Get(x => x.FromStateId == request.CurrentStateId && x.Action.CodeName == actionCodeName, "Action,ToState");
+                var path = this.workflowEngineDbContext.Path
+                    .Include(x => x.Action)
+                    .Include(x => x.ToState)
+                    .Single(x => x.FromStateId == request.CurrentStateId && x.Action.CodeName == actionCodeName);
                 nextState = path.ToState;
             }
             else
             {
-                var paths = this.unitOfWork.GetRepository<Path>().GetMany(x => x.FromStateId == request.CurrentStateId, "Action,ToState");
+                var paths = this.workflowEngineDbContext.Path
+                    .Include(x => x.Action)
+                    .Include(x => x.ToState)
+                    .Where(x => x.FromStateId == request.CurrentStateId)
+                    .ToList();
                 var pathIds = paths.Select(x => x.Id);
-                var authorizedPathUsers = this.unitOfWork.GetRepository<PathUser>().GetMany(x => pathIds.Contains(x.PathId) && x.UserId == userId, string.Empty);
+                var authorizedPathUsers = this.workflowEngineDbContext.PathUser
+                    .Where(x => pathIds.Contains(x.PathId) && x.UserId == userId)
+                    .ToList();
                 var authorizedPathIds = authorizedPathUsers.Select(x => x.PathId);
                 var path = paths.Where(x => authorizedPathIds.Contains(x.Id) && x.Action.CodeName == actionCodeName).SingleOrDefault();
 
@@ -63,7 +78,8 @@ namespace WorkflowEngine.BusinessLogic.Services
 
         public State GetStartState(Guid processId)
         {
-            return this.unitOfWork.GetRepository<State>().Get(new StartStateSpecification(processId), string.Empty);
+            return this.workflowEngineDbContext.State
+                .Single(new StartStateSpecification(processId));
         }
 
         public Progress SaveProgress(Guid requestId, string actionCodeName, Guid userId, string message, RequestData data)
@@ -78,25 +94,27 @@ namespace WorkflowEngine.BusinessLogic.Services
                 ProgressedById = userId,
                 RequestId = requestId
             };
-            this.unitOfWork.GetRepository<Progress>().Add(progress);
+            this.workflowEngineDbContext.Progress.Add(progress);
 
-            var request = this.unitOfWork.GetRepository<Request>().GetById(requestId);
+            var request = this.workflowEngineDbContext.Request
+                .Find(requestId);
             request.CurrentStateId = nextState.Id;
             request.Data = data;
-            this.unitOfWork.GetRepository<Request>().Update(request);
+            this.workflowEngineDbContext.Request.Update(request);
 
-            this.unitOfWork.SaveChanges();
+            this.workflowEngineDbContext.SaveChanges();
 
             return progress;
         }
 
         public IList<Guid?> GetProgressedUserIdsForRecursiveState(Guid requestId)
         {
-            var userIds = unitOfWork.GetRepository<Progress>().GetManyWhile(
-                whilePredicate: x => x.Path.Action.ActionType == ActionType.RestartAction || true,
-                where: x => x.RequestId == requestId && x.Path.FromStateId == x.Request.CurrentStateId && x.Path.ToStateId == x.Request.CurrentStateId,
-                include: x => x.Include(progress => progress.Path).ThenInclude(path => path.Action).Include(progress => progress.Request),
-                orderBy: x => x.OrderByDescending(p => p.ProgressDate))
+            var userIds = workflowEngineDbContext.Progress
+                .Include(progress => progress.Path).ThenInclude(path => path.Action)
+                .Include(progress => progress.Request)
+                .Where(x => x.RequestId == requestId && x.Path.FromStateId == x.Request.CurrentStateId && x.Path.ToStateId == x.Request.CurrentStateId)
+                .OrderByDescending(p => p.ProgressDate)
+                .TakeWhile(x => x.Path.Action.ActionType == ActionType.RestartAction || true)
                 .Select(x => x.ProgressedById)
                 .ToList();
 
@@ -105,10 +123,14 @@ namespace WorkflowEngine.BusinessLogic.Services
 
         public IList<Path> GetPossibleRequestPaths(Guid requestId, Guid userId)
         {
-            var request = this.unitOfWork.GetRepository<Request>().Get(x => x.Id == requestId, x => x.Include(r => r.CurrentState));
-            var paths = this.unitOfWork.GetRepository<Path>().GetMany(
-                x => x.FromStateId == request.CurrentStateId,
-                e => e.Include(x => x.Action).ThenInclude(x => x.ActionType).Include(x => x.ToState).Include(x => x.FromState));
+            var request = this.workflowEngineDbContext.Request
+                .Include(r => r.CurrentState)
+                .Single(x => x.Id == requestId);
+
+            var paths = this.workflowEngineDbContext.Path
+                .Include(x => x.Action).ThenInclude(x => x.ActionType).Include(x => x.ToState).Include(x => x.FromState)
+                .Where(x => x.FromStateId == request.CurrentStateId)
+                .ToList();
 
             if (request.CurrentState.StateType == StateType.RecursiveState)
             {
@@ -125,7 +147,9 @@ namespace WorkflowEngine.BusinessLogic.Services
             if (isProcessAdmin == false)
             {
                 var pathIds = paths.Select(x => x.Id);
-                var authorizedPathUsers = this.unitOfWork.GetRepository<PathUser>().GetMany(x => pathIds.Contains(x.PathId) && x.UserId == userId, string.Empty);
+                var authorizedPathUsers = this.workflowEngineDbContext.PathUser
+                    .Where(x => pathIds.Contains(x.PathId) && x.UserId == userId)
+                    .ToList();
                 var authorizedPathIds = authorizedPathUsers.Select(x => x.PathId);
                 authorizedPossiblePaths = paths.Where(x => authorizedPathIds.Contains(x.Id)).ToList();
             }

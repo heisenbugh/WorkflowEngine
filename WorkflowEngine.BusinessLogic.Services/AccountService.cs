@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using System.Text;
 using WorkflowEngine.Core.Dtos;
 using WorkflowEngine.Core.Entities;
-using WorkflowEngine.Core.UnitOfWork;
 using WorkflowEngine.Core.Services;
 using WorkflowEngine.BusinessLogic.Specifications;
 using System.Linq;
 using Haskap.LayeredArchitecture.Core.Specifications;
+using WorkflowEngine.DataAccess.DbContexts;
 
 namespace WorkflowEngine.BusinessLogic.Services
 {
     public class AccountService : BaseService, IAccountService
     {
-        private readonly IWorkflowEngineUnitOfWork unitOfWork;
-        public AccountService(IWorkflowEngineUnitOfWork unitOfWork)
+        private readonly EfCoreOracleWorkflowEngineDbContext workflowEngineDbContext;
+        public AccountService(EfCoreOracleWorkflowEngineDbContext workflowEngineDbContext)
         {
-            this.unitOfWork = unitOfWork;
+            this.workflowEngineDbContext = workflowEngineDbContext;
         }
 
         public void AddUser(AddUserInputDto addUserInputDto)
@@ -27,15 +27,16 @@ namespace WorkflowEngine.BusinessLogic.Services
                 FirstName = addUserInputDto.FirstName,
                 LastName = addUserInputDto.LastName
             };
-            this.unitOfWork.GetRepository<User>().Add(user);
-            this.unitOfWork.SaveChanges();
+            this.workflowEngineDbContext.User.Add(user);
+            this.workflowEngineDbContext.SaveChanges();
         }
 
         public IList<HasanUserDto> GetHasanUserList()
         {
             var userFirstNameStartsWithSpecification = new UserFirstNameStartsWithSpecification();
             var userLastNameStartsWithSpecification = new UserLastNameStartsWithSpecification();
-            var hasanUserDtos = this.unitOfWork.GetRepository<User>().GetMany(userFirstNameStartsWithSpecification.And(userLastNameStartsWithSpecification), string.Empty)
+            var hasanUserDtos = this.workflowEngineDbContext.User
+                .Where(userFirstNameStartsWithSpecification.And(userLastNameStartsWithSpecification))
                 .Select(x => new HasanUserDto
                 {
                     Id = x.Id,
