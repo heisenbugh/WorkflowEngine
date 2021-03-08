@@ -30,10 +30,11 @@ namespace WorkflowEngine.UI.MvcUI
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<EfCoreOracleWorkflowEngineDbContext>(options => options.UseOracle(Configuration.GetConnectionString("ConnectionString")));
+            services.AddDbContext<EfCoreNpgsqlWorkflowEngineDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ConnectionString")));
             
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IWorkflowEngineService, WorkflowEngineService>();
+            services.AddTransient<INotificationTemplateService, NotificationTemplateService>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

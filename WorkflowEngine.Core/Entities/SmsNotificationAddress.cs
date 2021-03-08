@@ -38,5 +38,10 @@ namespace WorkflowEngine.Core.Entities
         {
             return Regex.Replace(address, @"(\d{3})(\d{3})(\d{2})(\d{2})", "($1)-$2-$3-$4");
         }
+
+        public override string ToString()
+        {
+            return address;
+        }
     }
 }

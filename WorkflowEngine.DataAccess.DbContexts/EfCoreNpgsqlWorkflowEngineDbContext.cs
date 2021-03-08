@@ -1,4 +1,4 @@
-﻿using Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext;
+﻿using Haskap.LayeredArchitecture.DataAccess.DbContexts.NpgsqlDbContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using WorkflowEngine.DataAccess.DbContexts.Configurations;
 
 namespace WorkflowEngine.DataAccess.DbContexts
 {
-    public class EfCoreOracleWorkflowEngineDbContext : BaseEfCoreOracleDbContext
+    public class EfCoreNpgsqlWorkflowEngineDbContext : BaseEfCoreNpgsqlDbContext
     {
         public DbSet<User> User { get; set; }
         public DbSet<Core.Entities.Action> Action { get; set; }
@@ -24,7 +24,7 @@ namespace WorkflowEngine.DataAccess.DbContexts
         public DbSet<SmsNotificationTemplate> SmsNotificationTemplate { get; set; }
         public DbSet<EmailNotificationTemplate> EmailNotificationTemplate { get; set; }
 
-        public EfCoreOracleWorkflowEngineDbContext(DbContextOptions<EfCoreOracleWorkflowEngineDbContext> options) : base(options)
+        public EfCoreNpgsqlWorkflowEngineDbContext(DbContextOptions<EfCoreNpgsqlWorkflowEngineDbContext> options) : base(options)
         {
 
         }

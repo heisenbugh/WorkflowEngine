@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
-    <PackageReference Include="Oracle.EntityFrameworkCore" Version="3.19.80" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,14 +27,8 @@
     <Reference Include="Haskap.LayeredArchitecture.Core">
       <HintPath>..\References\Haskap.LayeredArchitecture.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext">
-      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.DbContexts.OraclelDbContext.dll</HintPath>
-    </Reference>
-    <Reference Include="Haskap.LayeredArchitecture.DataAccess.Repositories">
-      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.Repositories.dll</HintPath>
-    </Reference>
-    <Reference Include="Haskap.LayeredArchitecture.DataAccess.UnitOfWork">
-      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.UnitOfWork.dll</HintPath>
+    <Reference Include="Haskap.LayeredArchitecture.DataAccess.DbContexts.NpgsqlDbContext">
+      <HintPath>..\References\Haskap.LayeredArchitecture.DataAccess.DbContexts.NpgsqlDbContext.dll</HintPath>
     </Reference>
   </ItemGroup>
 

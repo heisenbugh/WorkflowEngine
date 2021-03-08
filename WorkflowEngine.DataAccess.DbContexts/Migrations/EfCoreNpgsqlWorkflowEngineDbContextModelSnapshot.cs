@@ -2,146 +2,127 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Oracle.EntityFrameworkCore.Metadata;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WorkflowEngine.DataAccess.DbContexts;
 
 namespace WorkflowEngine.DataAccess.DbContexts.Migrations
 {
-    [DbContext(typeof(EfCoreOracleWorkflowEngineDbContext))]
-    [Migration("20210218100901_NotificationTemplatelerAyrildi")]
-    partial class NotificationTemplatelerAyrildi
+    [DbContext(typeof(EfCoreNpgsqlWorkflowEngineDbContext))]
+    partial class EfCoreNpgsqlWorkflowEngineDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn)
-                .HasAnnotation("ProductVersion", "3.1.9")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Action", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
-                    b.Property<Guid?>("ActionTypeId")
-                        .HasColumnName("ACTION_TYPE_ID")
-                        .HasColumnType("RAW(16)");
+                    b.Property<string>("ActionType")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("action_type");
 
                     b.Property<string>("CodeName")
-                        .HasColumnName("CODE_NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("code_name");
 
                     b.Property<string>("Name")
-                        .HasColumnName("NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<Guid?>("ProcessId")
-                        .HasColumnName("PROCESS_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("process_id");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActionTypeId");
 
                     b.HasIndex("ProcessId");
 
-                    b.ToTable("ACTION");
-                });
-
-            modelBuilder.Entity("WorkflowEngine.Core.Entities.ActionType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
-
-                    b.Property<string>("Name")
-                        .HasColumnName("NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ACTION_TYPE");
+                    b.ToTable("action");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.EmailNotificationTemplate", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("BccAddresses")
-                        .HasColumnName("BCC_ADDRESSES")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("bcc_addresses");
 
                     b.Property<string>("CcAddresses")
-                        .HasColumnName("CC_ADDRESSES")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("cc_addresses");
 
                     b.Property<Guid>("ContentId")
-                        .HasColumnName("CONTENT_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("content_id");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnName("IS_ACTIVE")
-                        .HasColumnType("NUMBER(1)");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
 
                     b.Property<string>("Subject")
-                        .HasColumnName("SUBJECT")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("subject");
 
                     b.Property<string>("ToAddresses")
-                        .HasColumnName("TO_ADDRESSES")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("to_addresses");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ContentId")
                         .IsUnique();
 
-                    b.ToTable("EMAIL_NOTIFICATION_TEMPLATE");
+                    b.ToTable("email_notification_template");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.NotificationContentTemplate", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Content")
-                        .HasColumnName("CONTENT")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.HasKey("Id");
 
-                    b.ToTable("NOTIFICATION_CONTENT_TEMPLATE");
+                    b.ToTable("notification_content_template");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Path", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("ActionId")
-                        .HasColumnName("ACTION_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("action_id");
 
                     b.Property<Guid>("FromStateId")
-                        .HasColumnName("FROM_STATE_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("from_state_id");
 
                     b.Property<Guid>("ToStateId")
-                        .HasColumnName("TO_STATE_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("to_state_id");
 
                     b.HasKey("Id");
 
@@ -151,23 +132,23 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
 
                     b.HasIndex("ToStateId");
 
-                    b.ToTable("PATH");
+                    b.ToTable("path");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.PathUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("PathId")
-                        .HasColumnName("PATH_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("path_id");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnName("USER_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -175,43 +156,43 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PATH_USER");
+                    b.ToTable("path_user");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Process", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .HasColumnName("DESCRIPTION")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<string>("Name")
-                        .HasColumnName("NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PROCESS");
+                    b.ToTable("process");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.ProcessAdmin", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("AdminId")
-                        .HasColumnName("ADMIN_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("admin_id");
 
                     b.Property<Guid>("ProcessId")
-                        .HasColumnName("PROCESS_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("process_id");
 
                     b.HasKey("Id");
 
@@ -219,35 +200,35 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
 
                     b.HasIndex("ProcessId");
 
-                    b.ToTable("PROCESS_ADMIN");
+                    b.ToTable("process_admin");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Progress", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Message")
-                        .HasColumnName("MESSAGE")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("message");
 
                     b.Property<Guid?>("PathId")
-                        .HasColumnName("PATH_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("path_id");
 
                     b.Property<DateTime>("ProgressDate")
-                        .HasColumnName("PROGRESS_DATE")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("progress_date");
 
                     b.Property<Guid?>("ProgressedById")
-                        .HasColumnName("PROGRESSED_BY_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("progressed_by_id");
 
                     b.Property<Guid>("RequestId")
-                        .HasColumnName("REQUEST_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("request_id");
 
                     b.HasKey("Id");
 
@@ -257,167 +238,150 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
 
                     b.HasIndex("RequestId");
 
-                    b.ToTable("PROGRESS");
+                    b.ToTable("progress");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Request", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid?>("CurrentStateId")
-                        .HasColumnName("CURRENT_STATE_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("current_state_id");
 
                     b.Property<string>("Description")
-                        .HasColumnName("DESCRIPTION")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("owner_id");
 
                     b.Property<Guid?>("ProcessId")
-                        .HasColumnName("PROCESS_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("process_id");
 
                     b.Property<DateTime>("RequestDate")
-                        .HasColumnName("REQUEST_DATE")
-                        .HasColumnType("TIMESTAMP(7)");
-
-                    b.Property<Guid>("RequestedById")
-                        .HasColumnName("REQUESTED_BY_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("request_date");
 
                     b.Property<string>("Title")
-                        .HasColumnName("TITLE")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CurrentStateId");
 
+                    b.HasIndex("OwnerId");
+
                     b.HasIndex("ProcessId");
 
-                    b.HasIndex("RequestedById");
-
-                    b.ToTable("REQUEST");
+                    b.ToTable("request");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.RequestData", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("RequestId")
-                        .HasColumnName("REQUEST_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("request_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RequestId")
                         .IsUnique();
 
-                    b.ToTable("REQUEST_DATA");
+                    b.ToTable("request_data");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.SmsNotificationTemplate", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("ContentId")
-                        .HasColumnName("CONTENT_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("content_id");
 
                     b.Property<string>("GsmNumbers")
-                        .HasColumnName("GSM_NUMBERS")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("gsm_numbers");
 
                     b.Property<string>("Header")
-                        .HasColumnName("HEADER")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("header");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnName("IS_ACTIVE")
-                        .HasColumnType("NUMBER(1)");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ContentId")
                         .IsUnique();
 
-                    b.ToTable("SMS_NOTIFICATION_TEMPLATE");
+                    b.ToTable("sms_notification_template");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.State", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("CodeName")
-                        .HasColumnName("CODE_NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("code_name");
 
                     b.Property<string>("Name")
-                        .HasColumnName("NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<string>("PartialViewName")
-                        .HasColumnName("PARTIAL_VIEW_NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("partial_view_name");
 
                     b.Property<Guid?>("ProcessId")
-                        .HasColumnName("PROCESS_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("process_id");
 
-                    b.Property<Guid?>("StateTypeId")
-                        .HasColumnName("STATE_TYPE_ID")
-                        .HasColumnType("RAW(16)");
+                    b.Property<string>("StateType")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("state_type");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProcessId");
 
-                    b.HasIndex("StateTypeId");
-
-                    b.ToTable("STATE");
-                });
-
-            modelBuilder.Entity("WorkflowEngine.Core.Entities.StateType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
-
-                    b.Property<string>("Name")
-                        .HasColumnName("NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("STATE_TYPE");
+                    b.ToTable("state");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.StateUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("StateId")
-                        .HasColumnName("STATE_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("state_id");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnName("USER_ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -425,40 +389,37 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("STATE_USER");
+                    b.ToTable("state_user");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("FirstName")
-                        .HasColumnName("FIRST_NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("first_name");
 
                     b.Property<string>("LastName")
-                        .HasColumnName("LAST_NAME")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("text")
+                        .HasColumnName("last_name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("USER");
+                    b.ToTable("user");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Action", b =>
                 {
-                    b.HasOne("WorkflowEngine.Core.Entities.ActionType", "ActionType")
-                        .WithMany("Actions")
-                        .HasForeignKey("ActionTypeId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.HasOne("WorkflowEngine.Core.Entities.Process", "Process")
                         .WithMany("Actions")
                         .HasForeignKey("ProcessId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Process");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.EmailNotificationTemplate", b =>
@@ -468,6 +429,8 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("WorkflowEngine.Core.Entities.EmailNotificationTemplate", "ContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Content");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Path", b =>
@@ -489,6 +452,12 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("ToStateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Action");
+
+                    b.Navigation("FromState");
+
+                    b.Navigation("ToState");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.PathUser", b =>
@@ -504,6 +473,10 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Path");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.ProcessAdmin", b =>
@@ -519,6 +492,10 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("ProcessId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Admin");
+
+                    b.Navigation("Process");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Progress", b =>
@@ -538,6 +515,12 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Path");
+
+                    b.Navigation("ProgressedBy");
+
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.Request", b =>
@@ -547,16 +530,22 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("CurrentStateId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("WorkflowEngine.Core.Entities.User", "Owner")
+                        .WithMany("Requests")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WorkflowEngine.Core.Entities.Process", "Process")
                         .WithMany("Requests")
                         .HasForeignKey("ProcessId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("WorkflowEngine.Core.Entities.User", "RequestedBy")
-                        .WithMany("Requests")
-                        .HasForeignKey("RequestedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("CurrentState");
+
+                    b.Navigation("Owner");
+
+                    b.Navigation("Process");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.RequestData", b =>
@@ -566,6 +555,8 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("WorkflowEngine.Core.Entities.RequestData", "RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.SmsNotificationTemplate", b =>
@@ -575,6 +566,8 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("WorkflowEngine.Core.Entities.SmsNotificationTemplate", "ContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Content");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.State", b =>
@@ -584,10 +577,7 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("ProcessId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("WorkflowEngine.Core.Entities.StateType", "StateType")
-                        .WithMany("States")
-                        .HasForeignKey("StateTypeId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                    b.Navigation("Process");
                 });
 
             modelBuilder.Entity("WorkflowEngine.Core.Entities.StateUser", b =>
@@ -603,6 +593,71 @@ namespace WorkflowEngine.DataAccess.DbContexts.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("State");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WorkflowEngine.Core.Entities.Action", b =>
+                {
+                    b.Navigation("Paths");
+                });
+
+            modelBuilder.Entity("WorkflowEngine.Core.Entities.NotificationContentTemplate", b =>
+                {
+                    b.Navigation("EmailNotificationTemplate");
+
+                    b.Navigation("SmsNotificationTemplate");
+                });
+
+            modelBuilder.Entity("WorkflowEngine.Core.Entities.Path", b =>
+                {
+                    b.Navigation("PathUsers");
+
+                    b.Navigation("Progress");
+                });
+
+            modelBuilder.Entity("WorkflowEngine.Core.Entities.Process", b =>
+                {
+                    b.Navigation("Actions");
+
+                    b.Navigation("ProcessAdmins");
+
+                    b.Navigation("Requests");
+
+                    b.Navigation("States");
+                });
+
+            modelBuilder.Entity("WorkflowEngine.Core.Entities.Request", b =>
+                {
+                    b.Navigation("Data");
+
+                    b.Navigation("Progress");
+                });
+
+            modelBuilder.Entity("WorkflowEngine.Core.Entities.State", b =>
+                {
+                    b.Navigation("FromPaths");
+
+                    b.Navigation("Requests");
+
+                    b.Navigation("StateUsers");
+
+                    b.Navigation("ToPaths");
+                });
+
+            modelBuilder.Entity("WorkflowEngine.Core.Entities.User", b =>
+                {
+                    b.Navigation("PathUsers");
+
+                    b.Navigation("ProcessAdmins");
+
+                    b.Navigation("Progress");
+
+                    b.Navigation("Requests");
+
+                    b.Navigation("StateUsers");
                 });
 #pragma warning restore 612, 618
         }

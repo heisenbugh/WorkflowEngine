@@ -15,9 +15,9 @@ namespace WorkflowEngine.BusinessLogic.Services
 {
     public class WorkflowEngineService : BaseService, IWorkflowEngineService
     {
-        private readonly EfCoreOracleWorkflowEngineDbContext workflowEngineDbContext;
+        private readonly EfCoreNpgsqlWorkflowEngineDbContext workflowEngineDbContext;
 
-        public WorkflowEngineService(EfCoreOracleWorkflowEngineDbContext workflowEngineDbContext)
+        public WorkflowEngineService(EfCoreNpgsqlWorkflowEngineDbContext workflowEngineDbContext)
         {
             this.workflowEngineDbContext = workflowEngineDbContext;
         }

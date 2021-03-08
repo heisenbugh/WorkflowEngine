@@ -24,7 +24,7 @@ namespace WorkflowEngine.DataAccess.DbContexts.Configurations
             builder
                 .Property(x => x.ToAddresses)
                 .HasField("validatedToAddresses")
-                .HasColumnName("TO_ADDRESSES")
+                .HasColumnName("to_addresses")
                 .HasConversion(
                     v => string.Join(';', v),
                     v => v.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(x => new EmailNotificationAddress(x)).ToList())
@@ -34,7 +34,7 @@ namespace WorkflowEngine.DataAccess.DbContexts.Configurations
             builder
                 .Property(x => x.BccAddresses)
                 .HasField("validatedBccAddresses")
-                .HasColumnName("BCC_ADDRESSES")
+                .HasColumnName("bcc_addresses")
                 .HasConversion(
                     v => string.Join(';', v),
                     v => v.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(x => new EmailNotificationAddress(x)).ToList())
@@ -44,7 +44,7 @@ namespace WorkflowEngine.DataAccess.DbContexts.Configurations
             builder
                 .Property(x => x.CcAddresses)
                 .HasField("validatedCcAddresses")
-                .HasColumnName("CC_ADDRESSES")
+                .HasColumnName("cc_addresses")
                 .HasConversion(
                     v => string.Join(';', v),
                     v => v.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(x => new EmailNotificationAddress(x)).ToList())
