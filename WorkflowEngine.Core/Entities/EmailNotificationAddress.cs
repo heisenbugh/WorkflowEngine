@@ -11,6 +11,18 @@ namespace WorkflowEngine.Core.Entities
     {
         private string address;
 
+        public string Address
+        {
+            get
+            {
+                return address;
+            }
+            private set
+            {
+                address = value;
+            }
+        }
+
         public EmailNotificationAddress(string address)
         {
             this.address = address;
@@ -31,6 +43,11 @@ namespace WorkflowEngine.Core.Entities
         public static implicit operator EmailNotificationAddress(string address)
         {
             return new EmailNotificationAddress(address);
+        }
+
+        public override string ToString()
+        {
+            return address;
         }
     }
 }

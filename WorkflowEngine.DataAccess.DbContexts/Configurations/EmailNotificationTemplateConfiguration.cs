@@ -16,10 +16,10 @@ namespace WorkflowEngine.DataAccess.DbContexts.Configurations
         {
             base.Configure(builder); // Must call this
 
-            var emailNotificationAddressValueComparer = new ValueComparer<IReadOnlyCollection<EmailNotificationAddress>>(
+            var emailNotificationAddressValueComparer = new ValueComparer<IEnumerable<EmailNotificationAddress>>(
                 (c1, c2) => c1.SequenceEqual(c2),
                 c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
-                c => c.ToList());
+                c => c.ToList().AsEnumerable());
 
             builder
                 .Property(x => x.ToAddresses)
