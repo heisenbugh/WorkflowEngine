@@ -8,6 +8,7 @@ namespace WorkflowEngine.Core.Entities
 {
     public interface INotificationAddress
     {
+        string Address { get; }
         bool IsValid();
     }
 }
