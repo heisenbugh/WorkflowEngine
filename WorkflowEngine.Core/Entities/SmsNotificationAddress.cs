@@ -12,6 +12,18 @@ namespace WorkflowEngine.Core.Entities
     {
         private string address;
 
+        public string Address
+        {
+            get
+            {
+                return address;
+            }
+            private set
+            {
+                address = value;
+            }
+        }
+
         public SmsNotificationAddress(string address)
         {
             this.address = address;

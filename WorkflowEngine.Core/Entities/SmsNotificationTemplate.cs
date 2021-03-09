@@ -55,5 +55,15 @@ namespace WorkflowEngine.Core.Entities
                 throw new ArgumentException();
             }
         }
+
+        public void RemoveGsmNumber(int index)
+        {
+            validatedGsmNumbers.RemoveAt(index);
+        }
+
+        public void RemoveGsmNumber(SmsNotificationAddress gsmNumber)
+        {
+            validatedGsmNumbers.Remove(validatedGsmNumbers.Find(x => x.Address == gsmNumber.Address));
+        }
     }
 }
