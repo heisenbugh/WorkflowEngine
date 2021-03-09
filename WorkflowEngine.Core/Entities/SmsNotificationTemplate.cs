@@ -16,7 +16,11 @@ namespace WorkflowEngine.Core.Entities
             get
             {
                 return validatedGsmNumbers.AsReadOnly();
-            } 
+            }
+            private set
+            {
+                validatedGsmNumbers = value.ToList();
+            }
         }
         public Guid ContentId { get; set; }
         public NotificationContentTemplate Content { get; set; }
