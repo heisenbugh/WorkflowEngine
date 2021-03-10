@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkflowEngine.Core.Entities;
 
 namespace WorkflowEngine.Core.Validations
 {
-    public class SmsNotificationAddressValidator : AbstractValidator<string>
+    public class SmsNotificationAddressValidator : AbstractValidator<SmsNotificationAddress>
     {
         public SmsNotificationAddressValidator()
         {
-            RuleFor(x => x)
+            RuleFor(x => x.Address)
                 .NotNull()
                 .NotEmpty()
                 .Length(10, 10)

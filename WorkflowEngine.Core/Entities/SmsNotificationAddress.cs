@@ -32,7 +32,7 @@ namespace WorkflowEngine.Core.Entities
         public bool IsValid()
         {
             var validator = new SmsNotificationAddressValidator();
-            var validationResult = validator.Validate(address);
+            var validationResult = validator.Validate(this);
             return validationResult.IsValid;
         }
 
